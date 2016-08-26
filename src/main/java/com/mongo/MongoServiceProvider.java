@@ -9,11 +9,11 @@ import java.util.*;
 import com.constants.ResponseCodes;
 
 /**
- * Created by Kamal Dandamudi on 8/25/16.
  * Singleton class that implements the various methods that are required by
  * the UserServiceRouter. This class implements the following methods:
  * <i>getMongoServiceProvider</i>, <i>getAllUserDocuments</i>, <i>createUser</i>,
  * <i>updateUser</i>, <i>getUserDocument</i> and <i>deleteUser</i>.
+ * @author Kamal Dandamudi on 8/25/16.
  */
 
 public final class MongoServiceProvider {

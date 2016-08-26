@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static com.mongo.MongoServiceProvider.*;
 import java.util.List;
+import static java.util.UUID.*;
 
 /**
  * Created by Kamal Dandamudi on 8/26/16.
@@ -15,16 +16,18 @@ import java.util.List;
 public class MongoServiceProviderTest {
 
     // String and Document variables to use as parameters or to assert against
-    private final static String userJSONStringNew = "{\"id\":\"1630215c-2608-44b9-aad4-9d56d8aafd9f\", \"firstName\":\"Forris\", \"lastName\":\"Reeling\", \"email\":\" " + "Forris_Reeling@gmail.com\", \"address\":{\"street\":\"143 Tyson Valley\", \"city\":\"Dekalb\", \"zip\":\"60115\", \"state\":\"IL\",\"country\":\"US\"},\"dateCreated\":\"2016-03-15T07:02:40.896Z\",\"company\":{\"name\":\"Denesik Group\",\"website\":\"http://jodie.org\"}, \"profilePic\":\"http://lorempixel.com/640/480/people\" }";
+
+    // Generating random UUID so that the success test case for createUser doesn't fail because of existing old id.
+    private final static String userJSONStringNew = "{\"id\":\""+ randomUUID() +"\", \"firstName\":\"Forris\", \"lastName\":\"Reeling\", \"email\":\" " + "Forris_Reeling@gmail.com\", \"address\":{\"street\":\"143 Tyson Valley\", \"city\":\"Dekalb\", \"zip\":\"60115\", \"state\":\"IL\",\"country\":\"US\"},\"dateCreated\":\"2016-03-15T07:02:40.896Z\",\"company\":{\"name\":\"Denesik Group\",\"website\":\"http://jodie.org\"}, \"profilePic\":\"http://lorempixel.com/640/480/people\" }";
     private final static String userJSONStringExists = "{\"id\":\"1630215c-2608-44b9-aad4-9d56d8aafd5d\", \"firstName\":\"Forris\", \"lastName\":\"Reeling\", \"email\":\" " + "Forris_Reeling@gmail.com\", \"address\":{\"street\":\"143 Tyson Valley\", \"city\":\"Dekalb\", \"zip\":\"60115\", \"state\":\"IL\",\"country\":\"US\"},\"dateCreated\":\"2016-03-15T07:02:40.896Z\",\"company\":{\"name\":\"Denesik Group\",\"website\":\"http://jodie.org\"}, \"profilePic\":\"http://lorempixel.com/640/480/people\" }";
     private final static String userJSONStringExists2 = "{\"id\":\"1630215c-2608-44b9-aad4-9d56d8bbfd6f\", \"firstName\":\"Merry\", \"lastName\":\"Pippin\", \"email\":\" " + "Forris_Reeling@gmail.com\", \"address\":{\"street\":\"143 Tyson Valley\", \"city\":\"Dekalb\", \"zip\":\"60115\", \"state\":\"IL\",\"country\":\"US\"},\"dateCreated\":\"2016-03-15T07:02:40.896Z\",\"company\":{\"name\":\"Denesik Group\",\"website\":\"http://jodie.org\"}, \"profilePic\":\"http://lorempixel.com/640/480/people\" }";
 
     private final static String existingUserID1 = "1630215c-2608-44b9-aad4-9d56d8aafd5d";
     private final static String existingUserID2 = "1630215c-2608-44b9-aad4-9d56d8bbfd6f";
-    private final static String newUserID = "12345";
+    private final static String newUserID = randomUUID().toString();
 
     private final static String updateJSONStringExists = "{\"id\":\"1630215c-2608-44b9-aad4-9d56d8aafd5d\", \"firstName\":\"Forris\", \"lastName\":\"Reeling\" }";
-    private final static String updateJSONStringNew = "{\"id\":\"1630215c-2608-44b9-aad4-9d56d8aafddd\", \"firstName\":\"Forris\", \"lastName\":\"Reeling\" }";
+    private final static String updateJSONStringNew = "{\"id\":\""+randomUUID()+"\", \"firstName\":\"Forris\", \"lastName\":\"Reeling\" }";
 
     private final static Document oldUserDocument = Document.parse(userJSONStringExists);
 
@@ -98,7 +101,6 @@ public class MongoServiceProviderTest {
     @Test
     public void deleteUserFailure() throws Exception {
         Document failure = getMongoServiceProvider().deleteUser(newUserID);
-        System.out.println(failure.toString());
         assert(failure.toString().contains(ResponseCodes.Failure.getCodeString()));
     }
 

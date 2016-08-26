@@ -8,13 +8,13 @@ import static com.mongo.MongoServiceProvider.getMongoServiceProvider;
 import com.constants.ResponseCodes;
 
 /**
- * Created by Kamal Dandamudi on 8/25/16.
  * Class to define the various routes the application can support.
  * Routes supported include <i>createUser</i>, <i>getAllUsers</i>,
  * <i>getUser</i>, <i>updateUser</i> and <i>deleteUser</i>.
  * <p>Each route makes use of the corresponding method from the
  * singleton instance of <i>MongoServiceProvider</i> class to update
  * the documents in mongodb corresponding to users</p>
+ * @author Kamal Dandamudi on 8/25/16.
  */
 public class UserServiceRouter {
 

@@ -1,9 +1,9 @@
 package com.constants;
 
 /**
- * Created by Kamal Dandamudi on 8/26/16.
  * Enum class to define response codes being used in the application.
  * Each enum has a string values attached to it.
+ * @author Kamal Dandamudi on 8/26/16.
  */
 public enum ResponseCodes{
     Success("Success"),
