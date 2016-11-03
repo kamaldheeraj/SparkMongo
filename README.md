@@ -1,5 +1,3 @@
-# Egen back end coding challenge
-
 Project involves building Restful Web services for "user" Documents in MongoDB using Spark Java.
 
 Web service operations include:
